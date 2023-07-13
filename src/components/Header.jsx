@@ -2,10 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/logo.png";
 import { getServerSession } from "next-auth";
+import UserMenu from "./User/UserMenu/UserMenu";
 
-export default async function Header() {
-  const session = await getServerSession();
-  console.log({ session });
+export default function Header() {
   return (
     <header className="py-2 px-5 flex items-center justify-between">
       <div className="flex gap-2">
@@ -19,29 +18,13 @@ export default async function Header() {
       </div>
       <div className="flex gap-2">
         {/* All the links with Icons */}
-        {session ? (
-          <div className="me">
-            {/* My avatar with drop down for profile, logout*/}
-            {/* In drop down my avatar & name will be visible
+        <div className="me">
+          {/* My avatar with drop down for profile, logout*/}
+          {/* In drop down my avatar & name will be visible
                 Below it: Btn => View Profile
             */}
-            <Image
-              src={session?.user?.image}
-              width={32}
-              height={32}
-              alt="User"
-            />
-          </div>
-        ) : (
-          <div className="flex gap-2">
-            <Link
-              className="font-semibold text-md text-sky-500 "
-              href="/api/auth/signin"
-            >
-              Sign In
-            </Link>
-          </div>
-        )}
+          <UserMenu />
+        </div>
       </div>
     </header>
   );
