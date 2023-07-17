@@ -15,7 +15,7 @@ export const connectToDB = async () => {
   }
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      dbName: "SnapConnect",
+      dbName: "SocialTweets",
 
       useNewUrlParser: true, // ensure compatibility with the latest version of MongoDB.
 

@@ -45,7 +45,6 @@ const DropDown = ({ user, open, close }) => {
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
-  console.log({ session });
 
   const close = () => setOpen(false);
 

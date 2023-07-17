@@ -16,11 +16,11 @@ const userSchema = new Schema({
   //   Additional
   followers: {
     type: Array,
-    default: [""],
+    default: [],
   },
   followings: {
     type: Array,
-    default: [""],
+    default: [],
   },
 });
 

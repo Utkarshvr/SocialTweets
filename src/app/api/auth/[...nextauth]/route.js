@@ -3,7 +3,7 @@ import { connectToDB } from "@/connection/connectToDB";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -11,13 +11,24 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session }) {
-      // Get the data of the user every single time
-      const sessionUser = await User.findOne({
-        email: session.user.email,
-      });
-      // Auto-created id sent by google is updated by the auto-created ID through MongdoDB
-      session.user.id = sessionUser._id.toString();
+    async jwt({ token, user }) {
+      console.log({ user });
+      if (user) {
+        // Get the data of the user every single time
+        const userDB = await User.findOne({
+          email: user.email,
+        });
+        if (userDB) {
+          // Auto-created id sent by google is updated by the auto-created ID through MongdoDB
+          token.id = userDB._id.toString();
+        }
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      console.log({ token });
+      const { name, email, picture: image, id } = token;
+      session.user = { name, email, image, id };
       return session;
     },
     async signIn({ profile }) {
@@ -34,7 +45,7 @@ const handler = NextAuth({
         // If not => create a new user and save user in MongoDB
         if (!userExists) {
           await User.create({
-            username: profile.name.replace(" ", "").toLowerCase(),
+            username: profile.name,
             email: profile.email,
             image: profile.picture,
           });
@@ -47,6 +58,8 @@ const handler = NextAuth({
       }
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
