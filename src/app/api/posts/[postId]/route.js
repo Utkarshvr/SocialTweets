@@ -8,9 +8,9 @@ export const GET = async (req, { params }) => {
 
     const post = await Posts.findById(params.postId);
 
-    if (!post) return new Response("Posts found", { status: 201 });
+    if (!post) return new Response("Posts not found", { status: 404 });
 
-    return new Response(JSON.stringify(post), { status: 201 });
+    return new Response(JSON.stringify(post), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch all the prompts", { status: 500 });
   }
