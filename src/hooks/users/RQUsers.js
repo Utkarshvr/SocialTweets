@@ -5,16 +5,11 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const fetchUserById = (userId) => axios.get(`${userRoute}/${userId}`);
 
-const followUser = ({ userId, postId }) =>
-  axios.post(`${userRoute}/${userId}/follow`, { userId });
+const followUser = ({ userId, myUserId }) =>
+  axios.post(`${userRoute}/${userId}/follow`, { userId: myUserId });
 
-export function usePosts() {
-  return useQuery("posts", fetchPosts, { staleTime: 30 * 1000 });
-}
-
-export function useAddPost() {
-  const queryClient = useQueryClient();
-  return useMutation("add-post", fetchUserById);
+export function useUserById() {
+  return useQuery("get-users", fetchUserById);
 }
 
 export function useFollowUser() {
