@@ -22,6 +22,10 @@ const userSchema = new Schema({
     type: Array,
     default: [],
   },
+  numPosts: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const User = models.User || model("User", userSchema);

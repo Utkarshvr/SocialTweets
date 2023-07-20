@@ -18,4 +18,11 @@ method: post (adding like) & delete (removing like)[x]
 1. API to follow users [x]
 2. Read User's Profiles [x]
 2. Read for user's particular posts [x]
-3. Frontend Profile Page []
+3. Frontend Profile Page [x]
+
+* 20|07|23 *
+1. Find a new way to get the current user's followings & followers [x]
+- followings & followers will change time to time, and we don't want to persist such things.😐 
+2. Solve the problem of displaying according to old states or props. [x]
+3. List the number of posts [x]
+4. Display all the other details (like: number of posts, followers, followings) [x]

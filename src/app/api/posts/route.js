@@ -1,3 +1,4 @@
+import User from "@/models/User";
 import { connectToDB } from "@/connection/connectToDB";
 import Posts from "@/models/Posts";
 import { NextResponse } from "next/server";
@@ -24,7 +25,9 @@ export async function POST(req) {
     const { userId, body, image } = await req.json();
     console.log({ userId, body, image });
 
+    const Creator = await User.findById(userId);
     const Post = await Posts.create({ creator: userId, body, image });
+    await Creator.updateOne({ $inc: { numPosts: 1 } });
 
     // const populatedPost = await Posts.findById(Post._id).populate("creator");
 

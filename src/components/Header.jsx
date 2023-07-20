@@ -5,7 +5,7 @@ import UserMenu from "./User/UserMenu/UserMenu";
 
 export default function Header() {
   return (
-    <header className="py-2 px-5 flex items-center justify-between">
+    <header className="z-[10000] bg-black sticky top-0 left-0 py-2 px-5 flex items-center justify-between">
       <div className="flex gap-2">
         <Link href="/feed" className="flex items-center gap-2">
           <Image src={logo} width={36} height={36} alt="Logo" />

@@ -14,7 +14,7 @@ const DropDown = ({ user, open, close }) => {
 
   return (
     <ul
-      className={`absolute w-64 ${
+      className={`z-50 absolute w-64 ${
         !open ? "opacity-0 collapse" : "opacity-100 visible"
       }  transition-all ease-in translate-y-1 text-center top-[100%] right-1 flex flex-col gap-1 py-2 px-4 bg-neutral-900 rounded-md`}
     >

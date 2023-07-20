@@ -15,6 +15,12 @@ export const POST = async (req, { params }) => {
     const User = await Users.findById(params.userId);
     const Me = await Users.findById(userId);
 
+    // Don't let a user follow himself
+    if (userId.toString() === params.userId.toString())
+      return new Response("Can't follow yourself. Tez chal raha hai kya", {
+        status: 400,
+      });
+
     if (!User.followers.includes(userId.toString())) {
       await User.updateOne({ $push: { followers: userId } });
       await Me.updateOne({ $push: { followings: params.userId } });
