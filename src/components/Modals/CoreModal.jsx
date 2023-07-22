@@ -48,7 +48,7 @@ export default function CoreModal() {
       <Backdrop>
         <div className="flex w-[80%] max-w-lg flex-col rounded-md bg-neutral-900">
           <div className="p-3 flex items-center justify-between border-b-2 border-neutral-700">
-            <p className="w-full text-center">{type}</p>
+            <p className="w-full font-semibold">{type}</p>
             <div onClick={() => onClose()} className={iconCss}>
               <MdClose size={20} />
             </div>

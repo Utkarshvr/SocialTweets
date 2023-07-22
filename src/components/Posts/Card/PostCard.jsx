@@ -1,9 +1,11 @@
 "use client";
 
 import PostHeader from "./utils/PostHeader";
-import PostContent from "./utils/PostContent";
 import PostImg from "./utils/PostImg";
 import PostActions from "./utils/PostActions";
+import PostComments from "./utils/PostComments";
+import CommentsProvider from "./context/CommentsProvider";
+import Content from "@/components/Layouts/Content/Content";
 
 /*
 isExpanded: FALSE
@@ -25,21 +27,25 @@ isExpanded: TRUE
 export default function PostCard({ post }) {
   return (
     <div id={post?._id} className="flex w-full flex-col">
-      {/* Header */}
-      <PostHeader
-        userId={post?.creator?._id}
-        userImage={post?.creator?.image}
-        username={post?.creator?.username}
-        createdAt={post?.createdAt}
-      />
-      {/* Content */}
-      <PostContent body={post?.body} />
+      <CommentsProvider>
+        {/* Header */}
+        <PostHeader
+          userId={post?.creator?._id}
+          userImage={post?.creator?.image}
+          username={post?.creator?.username}
+          createdAt={post?.createdAt}
+        />
+        {/* Content */}
+        <Content body={post?.body} />
 
-      {/* Image */}
-      {post?.image && <PostImg postImage={post?.image} />}
+        {/* Image */}
+        {post?.image && <PostImg postImage={post?.image} />}
 
-      {/* Actions */}
-      <PostActions postId={post?._id} postLikes={post?.likes} />
+        {/* Actions */}
+        <PostActions postId={post?._id} postLikes={post?.likes} />
+
+        <PostComments postId={post?._id} />
+      </CommentsProvider>
     </div>
   );
 }

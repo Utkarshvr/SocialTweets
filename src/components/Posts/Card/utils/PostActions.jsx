@@ -3,10 +3,15 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { MdComment, MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { iconCss } from "@/utils/css/cssClasses";
+import { useCommentsAPI } from "../context/CommentsProvider";
 
 const PostActions = ({ postId, postLikes }) => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
+
+  // For opening Comments Section
+  const { onOpen, onClose } = useCommentsAPI();
+  const [isCommentSectionOpen, setIsCommentSectionOpen] = useState(false);
 
   const [isLiked, setIsLiked] = useState(false);
   const [postLikesState, setPostLikesState] = useState([]);
@@ -68,7 +73,14 @@ const PostActions = ({ postId, postLikes }) => {
           />
         )}
       </div>
-      <div className={iconCss}>
+      <div
+        onClick={() => {
+          if (isCommentSectionOpen) onClose();
+          else onOpen({ postId });
+          setIsCommentSectionOpen((prev) => !prev);
+        }}
+        className={iconCss}
+      >
         <MdComment size={24} />
       </div>
     </div>

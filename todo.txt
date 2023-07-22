@@ -33,4 +33,7 @@ method: post (adding like) & delete (removing like)[x]
 2. Create a component for followers & followings list. [x]
 
 * 22|07|23 *
-1. Make the comments work
+1. Created the API for posting and fetching all the comments
+2. Integrated the API into Frontend so that users can comment on other user's posts
+3. Additional changes were made into the UI
+4. More Re-usable Components were created 

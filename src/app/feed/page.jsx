@@ -10,7 +10,7 @@ export default function FeedPage() {
   return (
     <Container>
       <CreatePostCard />
-      <hr className="my-2 border-zinc-900" />
+      <hr className="w-full my-2 border-zinc-900" />
       <Feed />
     </Container>
   );

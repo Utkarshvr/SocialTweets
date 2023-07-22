@@ -1,31 +1,29 @@
 import { Schema, model, models } from "mongoose";
 
-const PostSchema = new Schema(
+const CommentSchema = new Schema(
   {
+    post: {
+      type: Schema.Types.ObjectId,
+      ref: "Posts",
+      required: true,
+    },
     creator: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    body: {
+    comment: {
       type: String,
       required: true,
-    },
-    image: {
-      type: String,
     },
     //   Additional
     likes: {
       type: Array,
       default: [],
     },
-    numComments: {
-      type: Number,
-      default: 0,
-    },
   },
   { timestamps: true }
 );
 
-const Posts = models.Posts || model("Posts", PostSchema);
-export default Posts;
+const Comments = models.Comments || model("Comments", CommentSchema);
+export default Comments;
