@@ -1,5 +1,4 @@
-# Tomorrow
-
+* 15|07|23 *
 1. Create API Endpoints
 - Posts: 
 CRUD [x]
@@ -26,3 +25,12 @@ method: post (adding like) & delete (removing like)[x]
 2. Solve the problem of displaying according to old states or props. [x]
 3. List the number of posts [x]
 4. Display all the other details (like: number of posts, followers, followings) [x]
+
+* 21|07|23 *
+1. Make a re-usable Modal Component. [x]
+- The Header will include the title and a close button
+- After a visible border, the actual modal or form or anything will appear.
+2. Create a component for followers & followings list. [x]
+
+* 22|07|23 *
+1. Make the comments work

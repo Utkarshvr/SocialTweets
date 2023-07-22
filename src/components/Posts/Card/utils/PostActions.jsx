@@ -15,9 +15,12 @@ const PostActions = ({ postId, postLikes }) => {
 
   const handleLikePost = () => {
     // console.log("Inside Handler");
-
-    likePost({ postId, userId });
-    setIsLiked((prev) => !prev);
+    if (userId) {
+      likePost({ postId, userId });
+      setIsLiked((prev) => !prev);
+    } else {
+      setIsLiked(false);
+    }
   };
 
   useEffect(() => {

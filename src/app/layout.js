@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Provider from "@/context";
+import CoreModal from "@/components/Modals/CoreModal";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       <body className={montserrat.className}>
         <Provider>
           <Header />
+          <CoreModal />
           {children}
         </Provider>
       </body>

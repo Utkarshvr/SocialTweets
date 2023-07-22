@@ -1,6 +1,7 @@
 "use client";
 import FlwBtn from "@/components/UI/FlwBtn";
 import UserAvatar from "@/components/User/UserAvatar/UserAvatar";
+import { useModalAPI } from "@/context/ModalProvider/PostModalProvider";
 import { useMyProfile, useUserById } from "@/hooks/users/RQUsers";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -9,6 +10,7 @@ import { useEffect } from "react";
 export default function UserLongCard() {
   const param = useParams();
   const { data: session } = useSession();
+  const { onOpen } = useModalAPI();
 
   const { data, isLoading, isError, error } = useUserById(param?.userId);
   const { data: myProfile, mutate: getMyProfile } = useMyProfile();
@@ -16,7 +18,6 @@ export default function UserLongCard() {
   useEffect(() => {
     if (session?.user?.id) getMyProfile(session?.user?.id);
   }, [session]);
-  console.log({ myProfile, myID: session?.user?.id });
 
   if (isLoading)
     return (
@@ -56,7 +57,10 @@ export default function UserLongCard() {
               height: "20px",
             }}
           />
-          <div className="flex gap-2 items-center justify-center text-md">
+          <div
+            onClick={() => onOpen("FOLLOWERS_LIST", data?.data?.followers)}
+            className="cursor-pointer flex gap-2 items-center justify-center text-md"
+          >
             <p className="font-semibold"> {data?.data?.followers?.length}</p>
             <p>Followers</p>
           </div>
@@ -66,7 +70,10 @@ export default function UserLongCard() {
               height: "20px",
             }}
           />
-          <div className="flex gap-2 items-center justify-center text-md">
+          <div
+            onClick={() => onOpen("FOLLOWING_LIST", data?.data?.followings)}
+            className="cursor-pointer flex gap-2 items-center justify-center text-md"
+          >
             <p className="font-semibold">{data?.data?.followings?.length}</p>
             <p>Following</p>
           </div>
@@ -80,8 +87,10 @@ export default function UserLongCard() {
       {/* Action */}
       {session?.user?.id === param?.userId ? null : !!!session?.user ? null : (
         <FlwBtn
+          fullWidth
           myFollowings={myProfile?.data?.followings}
           myUserId={session?.user?.id}
+          requestedUserId={param?.userId}
         />
       )}
     </div>

@@ -3,7 +3,8 @@ import { createContext, useContext, useMemo, useReducer } from "react";
 
 const INITIAL_STATE = {
   openModal: false,
-  payload: null,
+  modalType: null,
+  information: null,
 };
 
 export const ModalAPIContext = createContext();
@@ -13,7 +14,12 @@ const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case "OPEN":
-      return { openModal: true, payload: payload };
+      // console.log("OPEN: ", payload.information);
+      return {
+        openModal: true,
+        modalType: payload.modalType,
+        information: payload.information,
+      };
     case "CLOSE":
       return INITIAL_STATE;
     default:
@@ -23,11 +29,16 @@ const reducer = (state, action) => {
 export default function ModalProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-  const data = { openModal: state.openModal, payload: state.payload };
+  const data = {
+    openModal: state.openModal,
+    modalType: state.modalType,
+    information: state.information,
+  };
 
   const api = useMemo(() => {
-    const onOpen = (payload) => {
-      dispatch({ type: "OPEN", payload: payload });
+    const onOpen = (modalType, information) => {
+      // console.log("Provider: ", { modalType, information });
+      dispatch({ type: "OPEN", payload: { modalType, information } });
     };
 
     const onClose = () => {

@@ -1,10 +1,13 @@
 "use client";
 import { useFollowUser } from "@/hooks/users/RQUsers";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function FlwBtn({ myFollowings, myUserId }) {
-  const paramUserId = useParams()?.userId;
+export default function FlwBtn({
+  myFollowings,
+  myUserId,
+  requestedUserId,
+  fullWidth,
+}) {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const { mutate: followUser, data, isError, isLoading } = useFollowUser();
@@ -12,7 +15,7 @@ export default function FlwBtn({ myFollowings, myUserId }) {
   console.log({ flwResponse: data?.data, myFollowings, myUserId });
 
   const handleFollow = () => {
-    followUser({ myUserId, userId: paramUserId });
+    followUser({ myUserId, userId: requestedUserId });
     setIsFollowing((prev) => !prev);
   };
 
@@ -21,17 +24,17 @@ export default function FlwBtn({ myFollowings, myUserId }) {
   }, [isError]);
 
   useEffect(() => {
-    if (myFollowings && paramUserId) {
-      const isFlwing = myFollowings?.includes(paramUserId);
+    if (myFollowings && requestedUserId) {
+      const isFlwing = myFollowings?.includes(requestedUserId);
       setIsFollowing(isFlwing);
     }
-  }, [paramUserId, myFollowings]);
+  }, [requestedUserId, myFollowings]);
 
   return (
     <button
       onClick={handleFollow}
       disabled={!!!myFollowings || isLoading}
-      className={`w-full px-2 py-1 ${
+      className={`${fullWidth ? "w-full" : "h-max"} px-2 py-1 ${
         isFollowing ? "bg-red-600" : "bg-sky-600"
       } font-semibold rounded-md hover:bg-opacity-40 hover:text-neutral-300 disabled:bg-neutral-600 disabled:cursor-not-allowed`}
     >
