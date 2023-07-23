@@ -39,7 +39,7 @@ export default function FlwBtn({
       } font-semibold rounded-md hover:bg-opacity-40 hover:text-neutral-300 disabled:bg-neutral-600 disabled:cursor-not-allowed`}
     >
       {!!!myFollowings || isLoading
-        ? "Loading..."
+        ? "Wait..."
         : isFollowing
         ? "Unfollow"
         : "Follow"}

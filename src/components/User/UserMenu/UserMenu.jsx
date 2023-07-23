@@ -63,7 +63,7 @@ export default function UserMenu() {
   else
     return (
       <button
-        className="font-semibold text-md text-sky-500 "
+        className="font-semibold text-md bg-sky-500 rounded-md px-2 py-1"
         onClick={() => signIn("google")}
       >
         Sign In

@@ -2,9 +2,11 @@
 import { Fragment } from "react";
 import PostCard from "../Posts/Card/PostCard";
 import { usePosts } from "@/hooks/posts/RQPosts";
+import { useSession } from "next-auth/react";
 
 export default function Feed() {
   const { data, isLoading, isError, error } = usePosts();
+  const { data: session } = useSession();
   if (isLoading)
     return (
       <div className="w-full flex flex-col gap-3 items-center">
@@ -24,7 +26,7 @@ export default function Feed() {
       ) : (
         data?.data?.map((post, i) => (
           <Fragment key={post?._id}>
-            <PostCard post={post} />
+            <PostCard myUserId={session?.user?.id} post={post} />
             <hr className="w-full my-1 border-zinc-900" />
           </Fragment>
         ))

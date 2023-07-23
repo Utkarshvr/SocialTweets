@@ -24,7 +24,7 @@ isExpanded: TRUE
 
 */
 
-export default function PostCard({ post }) {
+export default function PostCard({ myUserId, post }) {
   return (
     <div id={post?._id} className="flex w-full flex-col">
       <CommentsProvider>
@@ -33,7 +33,9 @@ export default function PostCard({ post }) {
           userId={post?.creator?._id}
           userImage={post?.creator?.image}
           username={post?.creator?.username}
+          followers={post?.creator?.followers}
           createdAt={post?.createdAt}
+          myUserId={myUserId}
         />
         {/* Content */}
         <Content body={post?.body} />
