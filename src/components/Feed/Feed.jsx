@@ -23,7 +23,7 @@ export default function Feed() {
         <p className="text-lg">Nothing to show here</p>
       ) : (
         data?.data?.map((post, i) => (
-          <Fragment key={i}>
+          <Fragment key={post?._id}>
             <PostCard post={post} />
             <hr className="w-full my-1 border-zinc-900" />
           </Fragment>
