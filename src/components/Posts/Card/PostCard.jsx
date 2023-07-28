@@ -6,6 +6,7 @@ import PostActions from "./utils/PostActions";
 import PostComments from "./utils/PostComments";
 import CommentsProvider from "./context/CommentsProvider";
 import Content from "@/components/Layouts/Content/Content";
+import PostInfoBar from "./utils/PostInfoBar";
 
 /*
 isExpanded: FALSE
@@ -42,6 +43,9 @@ export default function PostCard({ myUserId, post }) {
 
         {/* Image */}
         {post?.image && <PostImg postImage={post?.image} />}
+
+        {/* Info Bar */}
+        <PostInfoBar postLikes={post?.likes} numComments={post?.numComments} />
 
         {/* Actions */}
         <PostActions postId={post?._id} postLikes={post?.likes} />

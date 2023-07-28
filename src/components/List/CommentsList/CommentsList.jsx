@@ -16,7 +16,7 @@ export default function CommentsList({ postId }) {
   return comments?.data?.length > 0 ? (
     comments?.data.map((comment, i) => (
       <div key={comment?._id}>
-        <CommentListItem comment={comment} />
+        <CommentListItem postId={postId} comment={comment} />
         {i + 1 !== comments?.data?.length && (
           <hr className="w-full my-2 border-zinc-900" />
         )}

@@ -29,7 +29,7 @@ export async function POST(req, { params }) {
 
     const Post = await Posts.findById(params.postId);
     console.log({ Post });
-    // If Post not found then it doesn't matter
+    // If Post not found then it doesn't make sense to move forward
     if (!!!Post) return;
 
     const Comment = await Comments.create({

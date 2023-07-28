@@ -2,8 +2,15 @@
 import UserAvatar from "@/components/User/UserAvatar/UserAvatar";
 import { formatDistanceToNow } from "date-fns";
 import Content from "@/components/Layouts/Content/Content";
+import LikeCommentBtn from "./LikeCommentBtn";
+import DeleteCommentBtn from "./DeleteCommentBtn";
+import { useSession } from "next-auth/react";
 
-export default function CommentListItem({ comment }) {
+export default function CommentListItem({ comment, postId }) {
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+  const creatorId = comment?.creator?._id;
+
   return (
     <div className="flex gap-2">
       <div className="min-w-[10%]">
@@ -22,6 +29,12 @@ export default function CommentListItem({ comment }) {
         </div>
         <Content body={comment?.comment} />
       </div>
+
+      {/* Don't show delete for other user's comment */}
+      {userId === creatorId && (
+        <DeleteCommentBtn postId={postId} commentId={comment?._id} />
+      )}
+      <LikeCommentBtn commentId={comment?._id} commentLikes={comment?.likes} />
     </div>
   );
 }
