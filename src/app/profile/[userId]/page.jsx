@@ -4,15 +4,24 @@ import Container from "@/components/Layouts/Container/Container";
 import { baseUrl, userRoute } from "@/services/routes";
 
 export async function generateMetadata({ params }) {
-  // fetch data
-  const user = await fetch(`${baseUrl}${userRoute}/${params?.userId}`).then(
-    (res) => res.json()
-  );
+  try {
+    // fetch data
+    const user = await fetch(`${baseUrl}${userRoute}/${params?.userId}`).then(
+      (res) => res.json()
+    );
 
-  return {
-    title: user?.username,
-  };
+    return {
+      title: user?.username,
+    };
+  } catch (error) {
+    // Handle the error appropriately, log it, or provide a default value for 'title'
+    console.error("Error fetching user data:", error);
+    return {
+      title: "Profile", // Provide a fallback title or handle the error accordingly
+    };
+  }
 }
+
 export default function ProfilePage() {
   return (
     <Container>
