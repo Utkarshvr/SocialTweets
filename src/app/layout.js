@@ -9,6 +9,13 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 export const metadata = {
   title: "SocialTweets",
   description: "Create by create next app",
+  icons: {
+    icon: {
+      url: "/user-avatar.png",
+      type: "image/png",
+    },
+    shortcut: { url: "/user-avatar.png", type: "image/png" },
+  },
 };
 
 export default function RootLayout({ children }) {

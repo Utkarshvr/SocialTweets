@@ -3,9 +3,12 @@ import { Fragment } from "react";
 import PostCard from "../Posts/Card/PostCard";
 import { usePostsByUserId } from "@/hooks/users/RQUsers";
 import { useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function UserFeed() {
   const params = useParams();
+  const { data: session } = useSession();
+
   const { data, isLoading, isError, error } = usePostsByUserId(params?.userId);
 
   if (isLoading)
@@ -27,7 +30,7 @@ export default function UserFeed() {
       ) : (
         data?.data?.map((post, i) => (
           <Fragment key={i}>
-            <PostCard post={post} />
+            <PostCard myUserId={session?.user?.id} post={post} />
             <hr className="w-full my-1 border-zinc-900" />
           </Fragment>
         ))

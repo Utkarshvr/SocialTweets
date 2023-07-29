@@ -7,7 +7,8 @@ const fetchPosts = () => axios.get(postsRoute);
 
 const addPost = (post) => axios.post(postsRoute, post);
 
-const deletePost = (postId) => axios.delete(`${postsRoute}/${postId}`);
+const deletePost = ({ postId, userId }) =>
+  axios.delete(`${postsRoute}/${postId}`, { data: { userId } });
 
 const updatePost = ({ postId, updatedPost }) =>
   axios.put(`${postsRoute}/${postId}`, updatedPost);
@@ -22,6 +23,13 @@ export function usePosts() {
 export function useAddPost() {
   const queryClient = useQueryClient();
   return useMutation("add-post", addPost, {
+    onSuccess: () => queryClient.invalidateQueries("posts"),
+  });
+}
+
+export function useDeletePost() {
+  const queryClient = useQueryClient();
+  return useMutation("delete-post", deletePost, {
     onSuccess: () => queryClient.invalidateQueries("posts"),
   });
 }

@@ -1,3 +1,4 @@
+import User from "@/models/User";
 import { connectToDB } from "@/connection/connectToDB";
 import Posts from "@/models/Posts";
 
@@ -35,18 +36,32 @@ export const PUT = async (req, { params }) => {
     return new Response("Failed to fetch all the prompts", { status: 500 });
   }
 };
-// DELETE (delete)
 
+// DELETE (delete)
 export const DELETE = async (req, { params }) => {
   try {
+    const { userId } = await req.json();
+
     await connectToDB();
 
-    const post = await Posts.findByIdAndDelete(params.postId);
+    const post = await Posts.findById(params.postId);
 
-    if (!post) return new Response("Posts not found", { status: 404 });
+    if (!post) return new Response("Post not found", { status: 404 });
 
-    return new Response("Post Deleted Successfully", { status: 201 });
+    console.log({ creator: post?.creator?.toString() });
+
+    if (userId !== post?.creator?.toString())
+      return new Response("Not authorized", { status: 403 });
+
+    // Delete Post
+    await post.deleteOne();
+
+    const Creator = await User.findById(userId);
+    await Creator.updateOne({ $inc: { numPosts: -1 } });
+
+    return new Response("Comment deleted successfully", { status: 200 });
   } catch (error) {
-    return new Response("Failed to fetch all the prompts", { status: 500 });
+    console.log({ error });
+    return new Response("Failed to delete the post", { status: 500 });
   }
 };

@@ -1,3 +1,4 @@
+import PostMenu from "@/components/Menu/PostMenu/PostMenu";
 import UserAvatar from "@/components/User/UserAvatar/UserAvatar";
 // import { iconCss } from "@/utils/css/cssClasses";
 // import { MdMoreVert } from "react-icons/md";
@@ -5,6 +6,7 @@ import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
 const PostHeader = ({
+  postId,
   myUserId,
   userImage,
   userId,
@@ -22,7 +24,10 @@ const PostHeader = ({
           <div className="flex gap-1 text-sm">
             <p>{username}</p>
             {followers?.includes(myUserId) && (
-              <span className="font-semibold text-neutral-500"> • Following</span>
+              <span className="font-semibold text-neutral-500">
+                {" "}
+                • Following
+              </span>
             )}
           </div>
           <p className="text-xs text-neutral-600">
@@ -33,10 +38,8 @@ const PostHeader = ({
         </div>
       </Link>
       <div className="flex gap-2">
-        {/* Icons */}
-        {/* <div className={iconCss}>
-          <MdMoreVert size={24} />
-        </div> */}
+        {/* Others */}
+        {myUserId === userId && <PostMenu postId={postId} />}
       </div>
     </div>
   );

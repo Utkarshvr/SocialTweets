@@ -31,6 +31,7 @@ export default function PostCard({ myUserId, post }) {
       <CommentsProvider>
         {/* Header */}
         <PostHeader
+          postId={post?._id}
           userId={post?.creator?._id}
           userImage={post?.creator?.image}
           username={post?.creator?.username}
@@ -48,7 +49,11 @@ export default function PostCard({ myUserId, post }) {
         <PostInfoBar postLikes={post?.likes} numComments={post?.numComments} />
 
         {/* Actions */}
-        <PostActions postId={post?._id} postLikes={post?.likes} />
+        <PostActions
+          myUserId={myUserId}
+          postId={post?._id}
+          postLikes={post?.likes}
+        />
 
         <PostComments postId={post?._id} />
       </CommentsProvider>

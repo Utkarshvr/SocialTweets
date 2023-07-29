@@ -1,14 +1,10 @@
 import { useLikePost } from "@/hooks/posts/RQPosts";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { MdComment, MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { iconCss } from "@/utils/css/cssClasses";
 import { useCommentsAPI } from "../context/CommentsProvider";
 
-const PostActions = ({ postId, postLikes }) => {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
-
+const PostActions = ({ postId, postLikes, myUserId }) => {
   // For opening Comments Section
   const { onOpen, onClose } = useCommentsAPI();
   const [isCommentSectionOpen, setIsCommentSectionOpen] = useState(false);
@@ -19,9 +15,9 @@ const PostActions = ({ postId, postLikes }) => {
   // console.log({ isLiked });
 
   const handleLikePost = () => {
-    // console.log("Inside Handler");
-    if (userId) {
-      likePost({ postId, userId });
+    console.log("Inside Handler");
+    if (myUserId) {
+      likePost({ postId, userId: myUserId });
       setIsLiked((prev) => !prev);
     } else {
       setIsLiked(false);
@@ -29,21 +25,18 @@ const PostActions = ({ postId, postLikes }) => {
   };
 
   useEffect(() => {
-    // console.log("Inside State Likes Effect");
-
-    if (session && postLikesState) {
-      const isLikeIncluded = postLikesState?.includes(userId?.toString());
-      // console.log({ postLikesState, userId, isLikeIncluded });
+    if (myUserId && postLikesState) {
+      const isLikeIncluded = postLikesState?.includes(myUserId);
       setIsLiked(isLikeIncluded);
     }
-  }, [session, postLikesState]);
+  }, []);
 
   useEffect(() => {
     // console.log("Inside Default Likes Effect");
 
     if (postLikes) setPostLikesState(postLikes);
 
-    const isLikeIncluded = postLikes?.includes(userId?.toString());
+    const isLikeIncluded = postLikes?.includes(myUserId);
     // console.log({ postLikes, userId, isLikeIncluded });
     setIsLiked(isLikeIncluded);
   }, [postLikes]);
@@ -55,11 +48,11 @@ const PostActions = ({ postId, postLikes }) => {
     }
   }, [isError]);
 
-  // console.log({
-  //   likeRes: data?.data,
-  //   postLikes,
-  //   userId: userId?.toString(),
-  // });
+  console.log({
+    likeRes: data?.data,
+    postLikes,
+    myUserId,
+  });
 
   return (
     <div className="flex gap-4 items-center justify-end px-4 py-2">
@@ -67,10 +60,7 @@ const PostActions = ({ postId, postLikes }) => {
         {isLiked ? (
           <MdFavorite color="red" size={24} />
         ) : (
-          <MdFavoriteBorder
-            color={`${!!!session?.user ? "gray" : ""}`}
-            size={24}
-          />
+          <MdFavoriteBorder color={`${myUserId ? "gray" : ""}`} size={24} />
         )}
       </div>
       <div
