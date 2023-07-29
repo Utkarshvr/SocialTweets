@@ -3,16 +3,16 @@ import UserFeed from "@/components/Feed/UserFeed";
 import Container from "@/components/Layouts/Container/Container";
 import { baseUrl, userRoute } from "@/services/routes";
 
-export async function generateMetadata({ params }) {
-  // fetch data
-  const user = await fetch(`${baseUrl}${userRoute}/${params?.userId}`).then(
-    (res) => res.json()
-  );
+// export async function generateMetadata({ params }) {
+//   // fetch data
+//   const user = await fetch(`${baseUrl}${userRoute}/${params?.userId}`).then(
+//     (res) => res.json()
+//   );
 
-  return {
-    title: user?.username,
-  };
-}
+//   return {
+//     title: user?.username,
+//   };
+// }
 export default function ProfilePage() {
   return (
     <Container>
