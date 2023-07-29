@@ -4,7 +4,6 @@ import CommentListItem from "./utils/CommentListItem";
 
 export default function CommentsList({ postId }) {
   const { data: comments, isLoading } = useComments(postId);
-  console.log(comments?.data);
 
   if (isLoading)
     return (

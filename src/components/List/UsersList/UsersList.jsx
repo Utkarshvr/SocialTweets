@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 export default function UsersList({ users }) {
   const usersList = useUsersByList(users);
-  console.log(usersList);
 
   const { data: session } = useSession();
   const { data: myProfile, mutate: getMyProfile } = useMyProfile();

@@ -6,7 +6,6 @@ import { useDropzone } from "react-dropzone";
 
 export default function MultiUploader() {
   const [files, setFiles] = useState([]);
-  console.log({ files });
   const onDrop = useCallback((acceptedFiles) => {
     setFiles(acceptedFiles);
   }, []);
@@ -18,7 +17,6 @@ export default function MultiUploader() {
 
   const { startUpload, isUploading } = useUploadThing("imageUploader", {
     onClientUploadComplete: (file) => {
-      console.log({ file });
       alert("uploaded successfully!");
     },
     onUploadError: () => {

@@ -23,8 +23,6 @@ export default function CoreModal() {
     if (path) onClose();
   }, [path]);
 
-  console.log({ information });
-
   if (openModal) {
     let modal;
     let type;

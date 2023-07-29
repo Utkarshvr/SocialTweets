@@ -15,7 +15,7 @@ const PostActions = ({ postId, postLikes, myUserId }) => {
   // console.log({ isLiked });
 
   const handleLikePost = () => {
-    console.log("Inside Handler");
+    // console.log("Inside Handler");
     if (myUserId) {
       likePost({ postId, userId: myUserId });
       setIsLiked((prev) => !prev);
@@ -48,11 +48,11 @@ const PostActions = ({ postId, postLikes, myUserId }) => {
     }
   }, [isError]);
 
-  console.log({
-    likeRes: data?.data,
-    postLikes,
-    myUserId,
-  });
+  // console.log({
+  //   likeRes: data?.data,
+  //   postLikes,
+  //   myUserId,
+  // });
 
   return (
     <div className="flex gap-4 items-center justify-end px-4 py-2">

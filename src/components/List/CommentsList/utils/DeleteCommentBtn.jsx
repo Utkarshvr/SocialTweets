@@ -8,8 +8,6 @@ export default function DeleteCommentBtn({ commentId, postId }) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  console.log({ data, commentId, postId, userId });
-
   const handleDeletePost = () => {
     if (postId && commentId && userId) {
       deleteComment({ commentId, postId, userId });

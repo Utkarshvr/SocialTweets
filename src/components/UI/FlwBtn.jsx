@@ -12,8 +12,6 @@ export default function FlwBtn({
 
   const { mutate: followUser, data, isError, isLoading } = useFollowUser();
 
-  console.log({ flwResponse: data?.data, myFollowings, myUserId });
-
   const handleFollow = () => {
     followUser({ myUserId, userId: requestedUserId });
     setIsFollowing((prev) => !prev);

@@ -15,10 +15,8 @@ const Input = ({ postId, userId }) => {
     e.preventDefault();
     setError(null);
     const comment = ref?.current?.value;
-    // console.log({ comment, userId, postId });
 
     if (comment?.length > 0 && postId && userId) {
-      console.log("I reached inside");
       postComment({ comment, userId, postId });
     } else setError("Comment can't be empty");
   };

@@ -14,7 +14,7 @@ export default function PostMenu({ postId }) {
   const [open, setOpen] = useState(false);
 
   const { mutate: delPost, data } = useDeletePost();
-  console.log({ data });
+
   const handleDelete = () => {
     delPost({ postId, userId });
   };

@@ -12,8 +12,6 @@ export default function LikeCommentBtn({ commentId, commentLikes }) {
 
   const { mutate: likeComment, data, isError } = useLikeComment();
 
-  console.log({ data, commentLikes, numLikes });
-
   const handleLikePost = () => {
     if (userId) {
       likeComment({ commentId, userId });
@@ -30,7 +28,6 @@ export default function LikeCommentBtn({ commentId, commentLikes }) {
     if (commentLikes) {
       setNumLikes(commentLikes?.length);
       const checkIsLiked = commentLikes?.includes(userId);
-      console.log({ checkIsLiked });
       setIsLiked(checkIsLiked);
     }
   }, [commentLikes]);

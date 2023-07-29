@@ -38,7 +38,6 @@ export default function UploadImagePage() {
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
           // Do something with the response
-          console.log("Files: ", res);
           setImages(res);
         }}
         onUploadError={(error) => {
