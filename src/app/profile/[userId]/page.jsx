@@ -4,6 +4,8 @@ import Container from "@/components/Layouts/Container/Container";
 import { baseUrl, userRoute } from "@/services/routes";
 
 export async function generateMetadata({ params }) {
+  console.log("Logged URL: ", `${baseUrl}${userRoute}/${params?.userId}`);
+  console.log({ params });
   try {
     // fetch data
     const user = await fetch(`${baseUrl}${userRoute}/${params?.userId}`).then(
