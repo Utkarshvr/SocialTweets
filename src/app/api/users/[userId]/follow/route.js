@@ -1,14 +1,17 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { connectToDB } from "@/connection/connectToDB";
 import Users from "@/models/User";
 import { Types } from "mongoose";
+import { getServerSession } from "next-auth";
 
 // User (Follow & Unfollow)
 
 export const POST = async (req, { params }) => {
   try {
-    const { userId } = await req.json();
-    const isValidId = Types.ObjectId.isValid(userId);
-    if (!isValidId) return new Response("User Id not valid", { status: 400 });
+    const session = await getServerSession(authOptions);
+    if (!session) return new Response("Not logged in", { status: 401 });
+
+    const userId = session?.user?.id;
 
     await connectToDB();
 
@@ -17,7 +20,7 @@ export const POST = async (req, { params }) => {
 
     // Don't let a user follow himself
     if (userId.toString() === params.userId.toString())
-      return new Response("Can't follow yourself. Tez chal raha hai kya", {
+      return new Response("Great guy! But you can't follow yourself! LOL!", {
         status: 400,
       });
 
