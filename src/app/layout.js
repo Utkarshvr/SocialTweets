@@ -10,15 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "SocialTweets",
-  description: "Create by create next app",
-  icons: {
-    icon: {
-      url: "/user-avatar.png",
-      type: "image/png",
-    },
-    shortcut: { url: "/user-avatar.png", type: "image/png" },
-  },
+  title: "Strings",
+  description: "Stringing Moments Together",
 };
 
 export default function RootLayout({ children }) {

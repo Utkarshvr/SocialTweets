@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
     // Handle the error appropriately, log it, or provide a default value for 'title'
     console.error("Error fetching user data:", error);
     return {
-      title: "Profile", // Provide a fallback title or handle the error accordingly
+      title: "Profile | Strings", // Provide a fallback title or handle the error accordingly
     };
   }
 }
