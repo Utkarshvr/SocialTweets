@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo3.svg";
 import UserMenu from "./User/UserMenu/UserMenu";
 
 export default function Header() {
