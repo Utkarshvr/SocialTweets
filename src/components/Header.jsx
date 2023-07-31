@@ -10,7 +10,7 @@ export default function Header() {
         <Link href="/feed" className="flex items-center gap-2">
           <Image src={logo} width={36} height={36} alt="Logo" />
           <p className="font-semibold text-lg text-white p-0.5 rounded-sm">
-            SocialTweets
+            Strings
           </p>
         </Link>
         {/* App Icon & Search Bar */}
