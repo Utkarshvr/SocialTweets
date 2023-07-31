@@ -3,8 +3,8 @@ import Feed from "@/components/Feed/Feed";
 import Container from "@/components/Layouts/Container/Container";
 
 export const metadata = {
-  title: "Feed | SocialTweets",
-  description: "Create by create next app",
+  title: "Feed | Strings",
+  description: "Stringing Moments Together",
 };
 export default function FeedPage() {
   return (
